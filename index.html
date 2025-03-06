@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>PDF Label Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- Add Keyrune font -->
+    <link href="https://cdn.jsdelivr.net/npm/keyrune@latest/css/keyrune.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Add theme switcher -->
+                <div class="d-flex justify-content-end mb-3">
+                    <div class="btn-group" role="group" aria-label="Theme switcher">
+                        <input type="radio" class="btn-check" name="theme" id="theme-system" value="system" checked>
+                        <label class="btn btn-outline-secondary btn-sm" for="theme-system">
+                            <i class="bi bi-circle-half"></i> System
+                        </label>
+                        
+                        <input type="radio" class="btn-check" name="theme" id="theme-light" value="light">
+                        <label class="btn btn-outline-secondary btn-sm" for="theme-light">
+                            <i class="bi bi-sun-fill"></i> Light
+                        </label>
+                        
+                        <input type="radio" class="btn-check" name="theme" id="theme-dark" value="dark">
+                        <label class="btn btn-outline-secondary btn-sm" for="theme-dark">
+                            <i class="bi bi-moon-stars-fill"></i> Dark
+                        </label>
+                    </div>
+                </div>
+
+                <div class="alert alert-info mb-4" role="alert">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Printing Recommendation:</strong> For best results, use heavy duty card stock to make your dividers. 
+                    We recommend using 85 lb white card stock for durability.
+                    <a href="https://amzn.to/3FiZqur" class="alert-link ms-2" target="_blank" rel="noopener">
+                        <i class="bi bi-box-arrow-up-right"></i> View recommended card stock
+                    </a>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Card Divider Generator</h2>
+                        
+                        <!-- Settings section -->
+                        <div class="border-bottom pb-3 mb-4">
+                            <h6 class="mb-3">Settings</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="showSetIcons" checked>
+                                <label class="form-check-label" for="showSetIcons">
+                                    Set Icons
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="text-muted small mb-3">
+                                <i class="bi bi-info-circle me-1"></i>
+                                Supports Manabox CSV exports by default
+                                <i class="bi bi-question-circle ms-1" 
+                                   data-bs-toggle="modal" 
+                                   data-bs-target="#csvHelpModal" 
+                                   style="cursor: pointer;"></i>
+                            </div>
+                            <div class="upload-area p-3 rounded">
+                                <input type="file" id="csvFile" accept=".csv" onchange="handleCSVUpload(event)" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="left" class="form-label">Left Side Labels</label>
+                                    <textarea id="left" class="form-control" rows="8" placeholder="One entry per line" oninput="updateCounters()"></textarea>
+                                    <div class="text-muted mt-2" id="leftCount">0 Dividers</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="right" class="form-label">Right Side Labels</label>
+                                    <textarea id="right" class="form-control" rows="8" placeholder="One entry per line" oninput="updateCounters()"></textarea>
+                                    <div class="text-muted mt-2" id="rightCount">0 Dividers</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button onclick="generatePDF()" class="btn btn-primary btn-lg px-4" id="generateButton">
+                                Generate PDF
+                                <span class="spinner-border spinner-border-sm d-none" id="generateSpinner" role="status" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add affiliate disclosure -->
+                <div class="text-center text-muted mt-4 small">
+                    <p class="mb-0">
+                        <i class="bi bi-info-circle-fill me-1"></i>
+                        Some links on this site may be affiliate links. This helps support the site at no additional cost to you.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Modal -->
+    <div class="modal fade" id="csvHelpModal" tabindex="-1" aria-labelledby="csvHelpModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="csvHelpModalLabel">CSV Format Guide</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>To create your own CSV file, follow this format:</p>
+                    <div class="bg-light p-3 rounded">
+                        <code>Set code,Other columns...<br>
+                        KLD,... <br>
+                        DMR,... <br>
+                        MH2,...</code>
+                    </div>
+                    <ul class="mt-3">
+                        <li>The CSV must have a "Set code" column (case sensitive)</li>
+                        <li>Set codes should be 2-4 characters long</li>
+                        <li>Use only uppercase letters and numbers</li>
+                        <li>Other columns are optional</li>
+                    </ul>
+                    <p class="mb-0 text-muted small">Note: Manabox CSV exports are already in the correct format.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>
