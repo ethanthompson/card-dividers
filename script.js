@@ -187,7 +187,7 @@ function generateDividerSVG(text, isLeft) {
         <!-- Tab outline (without bottom line) -->
         ${isLeft 
             ? `<path d="M 1 1 L ${tabWidth} 1 L ${tabWidth} ${tabHeight} M 1 1 L 1 ${tabHeight}" />`
-            : `<path d="M ${baseWidth-1} 1 L ${baseWidth-tabWidth} 1 L ${baseWidth-tabWidth} ${tabHeight} M ${baseWidth-1} 1 L ${baseWidth-1} ${tabHeight}" />`
+            : `<path d="M ${baseWidth-2} 1 L ${baseWidth-tabWidth} 1 L ${baseWidth-tabWidth} ${tabHeight} M ${baseWidth-2} 1 L ${baseWidth-2} ${tabHeight}" />`
         }
     </g>` : ''}
     
