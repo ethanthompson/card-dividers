@@ -16,7 +16,7 @@ const PAPER_SIZES = {
 const BOX_SIZES = {
     'bcw-storage': {
         baseWidth: 94,
-        baseHeight: 66,
+        baseHeight: 68,
         tabHeight: 14
     },
     'bcw-quickfold': {
@@ -172,8 +172,17 @@ function generateDividerSVG(text, isLeft) {
     const svg = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="${baseWidth}mm" height="${totalHeight}mm" viewBox="0 0 ${baseWidth} ${totalHeight}" version="1.1" xmlns="http://www.w3.org/2000/svg">
     ${currentLineStyle !== 'none' ? `<g stroke="black" stroke-width="0.25" fill="none" ${currentLineStyle === 'dashed' ? 'stroke-dasharray="2,2"' : ''}>
-        <!-- Base rectangle -->
-        <rect x="1" y="${tabHeight}" width="${baseWidth-2}" height="${baseHeight-1}" />
+        <!-- Base rectangle with split top line -->
+        <path d="
+            M 1 ${tabHeight} 
+            L 1 ${baseHeight + tabHeight - 1} 
+            L ${baseWidth-2} ${baseHeight + tabHeight - 1} 
+            L ${baseWidth-2} ${tabHeight}
+            ${isLeft 
+                ? `M ${tabWidth} ${tabHeight} L ${baseWidth-2} ${tabHeight}` 
+                : `M 1 ${tabHeight} L ${baseWidth-tabWidth} ${tabHeight}`
+            }"
+        />
         
         <!-- Tab outline (without bottom line) -->
         ${isLeft 

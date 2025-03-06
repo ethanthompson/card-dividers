@@ -38,17 +38,10 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h2 class="card-title mb-3">Trading Card Divider Generator</h2>
-                        <p class="mb-3">Create custom dividers to organize your card collection. Simply enter your labels or import from a CSV file, then print and cut out the dividers to help sort and categorize your cards.</p>
-                        
-                        <div class="alert alert-info mb-4" role="alert">
-                            <i class="bi bi-info-circle me-2"></i>
-                            <strong>Printing Recommendation:</strong> For best results, use heavy duty card stock to make your dividers. 
-                            We recommend using 85 lb white card stock for durability.
-                            <a href="https://amzn.to/3FiZqur" class="alert-link ms-2" target="_blank" rel="noopener">
-                                <i class="bi bi-box-arrow-up-right"></i> View recommended card stock
-                            </a>
+                        <div class="border-bottom pb-3 mb-4">
+                            <p class="mb-3">Create custom dividers to organize your card collection. Simply enter your labels or import from a CSV file, then print and cut out the dividers to help sort and categorize your cards.</p>
+                            <p class="mb-0 text-small">For best results, we recommend using <a href="https://amzn.to/3FiZqur" target="_blank">card stock</a> and a <a href="https://amzn.to/41NIPIk" target="_blank"> paper cutter</a> to make your dividers.</p>
                         </div>
-                        
                         <!-- Settings section -->
                         <div class="border-bottom pb-3 mb-4">
                             <h3 class="mb-3">Settings</h3>
@@ -88,8 +81,8 @@
                                        style="cursor: pointer;"></i>
                                 </label>
                                 <select class="form-select" id="boxSize">
-                                    <option value="bcw-storage" selected>BCW Storage Box</option>
-                                    <option value="bcw-quickfold">BCW Quickfold Box</option>
+                                    <option value="bcw-storage" selected>BCW Storage Box (94mmx68mm, 14mm label)</option>
+                                    <option value="bcw-quickfold">BCW Quickfold Box (77mmx94mm, 14mm label)</option>
                                     <option value="custom">Custom Size</option>
                                 </select>
                             </div>
@@ -134,7 +127,8 @@
                             </div>
                         </div>
                         
-                        <div class="mb-4">
+                        <div class="border-bottom pb-3 mb-4">
+                            <h3 class="mb-3">Import Labels (Optional)</h3>
                             <div class="text-muted small mb-3">
                                 <i class="bi bi-info-circle me-1"></i>
                                 Supports Manabox CSV exports and custom labels
@@ -148,19 +142,22 @@
                             </div>
                         </div>
 
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="left" class="form-label">Left Side Labels</label>
-                                    <textarea id="left" class="form-control" rows="8" placeholder="One entry per line" oninput="updateCounters()"></textarea>
-                                    <div class="text-muted mt-2" id="leftCount">0 Dividers</div>
+                        <div class="border-bottom pb-3 mb-4">
+                            <h3 class="mb-3">Divider Labels</h3>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="left" class="form-label">Left Side Labels</label>
+                                        <textarea id="left" class="form-control" rows="8" placeholder="One entry per line" oninput="updateCounters()"></textarea>
+                                        <div class="text-muted mt-2" id="leftCount">0 Dividers</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="right" class="form-label">Right Side Labels</label>
-                                    <textarea id="right" class="form-control" rows="8" placeholder="One entry per line" oninput="updateCounters()"></textarea>
-                                    <div class="text-muted mt-2" id="rightCount">0 Dividers</div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="right" class="form-label">Right Side Labels</label>
+                                        <textarea id="right" class="form-control" rows="8" placeholder="One entry per line" oninput="updateCounters()"></textarea>
+                                        <div class="text-muted mt-2" id="rightCount">0 Dividers</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +173,8 @@
 
                 <!-- Footer -->
                 <footer class="text-muted mt-4">
-                    <div class="mb-3">
+                    <!-- Primary Footer Content -->
+                    <div class="border-bottom pb-3 mb-4 text-center">
                         <p class="small mb-1">
                             Created by <a href="https://ethanthompson.org" target="_blank" rel="noopener" class="text-muted">Ethan Thompson</a>
                             <span class="mx-2">•</span>
@@ -189,17 +187,34 @@
                             </a>
                         </p>
                     </div>
-                    <div class="mb-3">
-                        <p class="small mb-1">
-                            Set icons provided by <a href="https://scryfall.com" target="_blank" rel="noopener" class="text-muted">Scryfall</a>. 
-                            Data and images © Scryfall, LLC
-                        </p>
-                    </div>
-                    <div>
-                        <p class="small mb-0">
-                            <i class="bi bi-info-circle-fill me-1"></i>
-                            Some links on this site may be affiliate links. This helps support the site at no additional cost to you.
-                        </p>
+
+                    <!-- Attributions and Disclaimers -->
+                    <div class="ps-2 border-start border-4">
+                        <div class="mb-3">
+                            <p class="small mb-1">
+                                Set icons provided by <a href="https://scryfall.com" target="_blank" rel="noopener" class="text-muted">Scryfall</a>. 
+                                Data and images © Scryfall, LLC
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <p class="small mb-1">
+                                This site is not affiliated with BCW Supplies, but we love their products and aim to help collectors use them effectively. 
+                                For official BCW dividers, visit <a href="https://www.bcwsupplies.com/trading-card-dividers-horizontal" target="_blank" rel="noopener" class="text-muted">BCW Supplies</a>.
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <p class="small mb-1">
+                                Portions of this site are unofficial Fan Content permitted under the Wizards of the Coast Fan Content Policy. 
+                                The literal and graphical information presented on this site about Magic: The Gathering, including card images and mana symbols, 
+                                is copyright Wizards of the Coast, LLC. This site is not produced by or endorsed by Wizards of the Coast.
+                            </p>
+                        </div>
+                        <div>
+                            <p class="small mb-0">
+                                <i class="bi bi-info-circle-fill me-1"></i>
+                                Some links on this site may be affiliate links. This helps support the site at no additional cost to you.
+                            </p>
+                        </div>
                     </div>
                 </footer>
             </div>
